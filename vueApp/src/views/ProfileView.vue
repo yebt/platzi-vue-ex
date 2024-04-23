@@ -1,10 +1,16 @@
 <script>
-import store from "@/store/store.js"
+import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
-  data(){
-    return {
-      store
-    }
+  computed: {
+    // expand the state vars
+    ...mapState({
+      username: (state) => state.username
+    })
+  },
+  // expand the methods from mutates and actions as functions
+  methods: {
+    ...mapMutations(['updateUserNameMut']),
+    ...mapActions(['updateUserName'])
   }
 }
 </script>
@@ -13,7 +19,7 @@ export default {
     <div class="box">
       <img src="/avatars/avatar.jpg" alt="avatar" />
       <label for="username">Nombre de usuario</label>
-      <input type="text" placeholder="Jane Smith" :value="store.username" @input="store.updateUsername($event.target.value)"/>
+      <input type="text" placeholder="Jane Smith" :value="username" @input="updateUserName($event.target.value)"/>
       <button>Acceder</button>
     </div>
   </div>
