@@ -19,7 +19,6 @@ export default {
       search: '',
       profile: {
         username: 'Diana Nerd',
-        status: 'active',
         avatar: '/avatars/avatar.jpg'
       },
       channels: [
@@ -36,8 +35,9 @@ export default {
     // ...mapState({
     //   username: (state) => state.username
     // })
-    ...mapState(['username']),
-    ...mapGetters(['firstName'])
+    // ...mapState(['username']),
+    ...mapState(['status']),
+    ...mapGetters('profile',['firstNameP'])
   }
 
 }
@@ -49,8 +49,8 @@ export default {
     <InputSearch v-model="search" />
     <ProfileCard
       :avatar="profile.avatar"
-      :username="firstName(' ')"
-      :status="profile.status"
+      :username="firstNameP(' ')"
+      :status="status"
     />
     <RouterLink to="/" class="channels-title">Canales <Icon icon="carbon:hashtag" /></RouterLink>
     <div class="channels">

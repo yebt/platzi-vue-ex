@@ -9,8 +9,8 @@ export default {
   },
   // expand the methods from mutates and actions as functions
   methods: {
-    ...mapMutations(['updateUserNameMut']),
-    ...mapActions(['updateUserName'])
+    // ...mapMutations(['updateUserNameMut']),
+    ...mapActions('profile',['updateUserName'])
   }
 }
 </script>

@@ -1,15 +1,20 @@
-import { COMMIT_UPDATE_USERNAME_MUT } from '@/common/mutation-types.js'
-import { getUser } from '@/api'
+import { COMMIT_SET_STATUS_MUT, COMMIT_UPDATE_USERNAME_MUT } from "@/common/mutation-types.js";
+import { getUser } from "@/api";
 
 const module = {
+  namespaced: true,
   state() {
     return {
-      username: "Lucas",
+      username: "",
     };
   },
   getters: {
-    firstNameP(state) {
-      return state.username.split(".")[0];
+    // firstNameP(state) {
+    //   return state.username.split(".")[0];
+    // },
+    firstNameP: (state, getters, rootState) => (c) => {
+      // return state.username.split(".")[0];
+      return state.username
     },
     reverseName: (state) => (c) => {
       return state.username.split("").reverse().join(c);
@@ -24,12 +29,16 @@ const module = {
   // This could be async functions for call in balckend etc.
   actions: {
     async updateUserName(ctx, username) {
-      console.log("Update username action!!");
-      console.log("Old username", ctx.state.username);
-      console.log("new username", username);
+      // console.log("Update username action!!");
+      // console.log("Old username", ctx.state.username);
+      // console.log("new username", username);
       const user = await getUser(1);
       console.log(user);
-      ctx.commit("updateUserNameMut", user.username);
+      console.log('status', ctx.rootState.status, ctx.state)
+      if (ctx.state.username){
+        ctx.commit(COMMIT_SET_STATUS_MUT, 'active', {root:true})
+      }
+      ctx.commit(COMMIT_UPDATE_USERNAME_MUT, username);
     },
     updateUserName2({ commit }, username) {
       commit(COMMIT_UPDATE_USERNAME_MUT, username);
