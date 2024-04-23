@@ -4,7 +4,7 @@ export default {
   computed: {
     // expand the state vars
     ...mapState({
-      username: (state) => state.username
+      username: (state) => state.profile.username
     })
   },
   // expand the methods from mutates and actions as functions
