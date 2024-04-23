@@ -6,7 +6,6 @@ import ChatItem from '@/components/ChatItem.vue'
 import { mapState } from 'vuex'
 
 
-
 export default {
   components: {
     RouterView,

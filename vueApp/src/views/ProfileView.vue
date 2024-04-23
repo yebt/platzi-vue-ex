@@ -20,7 +20,7 @@ export default {
       <img src="/avatars/avatar.jpg" alt="avatar" />
       <label for="username">Nombre de usuario</label>
       <input type="text" placeholder="Jane Smith" :value="username" @input="updateUserName($event.target.value)"/>
-      <button>Acceder</button>
+      <button @click="$router.push('/')">Acceder</button>
     </div>
   </div>
 </template>

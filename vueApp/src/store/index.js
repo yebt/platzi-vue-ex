@@ -1,4 +1,7 @@
 import { createStore } from 'vuex'
+import { getUser } from '@/api'
+
+import { COMMIT_UPDATE_USERNAME_MUT } from '@/common/mutation-types.js'
 
 const store = createStore({
   state() {
@@ -16,20 +19,22 @@ const store = createStore({
   },
   // This just must be sync function
   mutations: {
-    updateUserNameMut(state, newUsername) {
+    [COMMIT_UPDATE_USERNAME_MUT](state, newUsername) {
         state.username = newUsername
     }
   },
   // This could be async functions for call in balckend etc.
   actions: {
-    updateUserName(ctx, username){  
+    async updateUserName(ctx, username){  
         console.log('Update username action!!') 
         console.log('Old username', ctx.state.username)
         console.log('new username', username)
-        ctx.commit('updateUserNameMut', username)
+        const user = await getUser(1)
+        console.log(user)
+        ctx.commit('updateUserNameMut', user.username)
     },
     updateUserName2({commit}, username){
-        commit('updateUserNameMut', username)
+        commit(COMMIT_UPDATE_USERNAME_MUT, username)
     }
   }
 })
