@@ -32,15 +32,10 @@ const module = {
   // This could be async functions for call in balckend etc.
   actions: {
     async updateUserName(ctx, username) {
-      // console.log("Update username action!!");
-      // console.log("Old username", ctx.state.username);
-      // console.log("new username", username);
       const user = await getUser(1);
-      console.log(user);
       ctx.commit(COMMIT_UPDATE_USERNAME_MUT, user.username);
       if (ctx.state.username) {
         ctx.commit(COMMIT_SET_STATUS_MUT, "active", { root: true });
-        console.log("status", ctx.rootState.status, ctx.state);
       }
     },
     updateUserName2({ commit }, username) {
