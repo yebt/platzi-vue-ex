@@ -1,4 +1,7 @@
-import { COMMIT_SET_STATUS_MUT, COMMIT_UPDATE_USERNAME_MUT } from "@/common/mutation-types.js";
+import {
+  COMMIT_SET_STATUS_MUT,
+  COMMIT_UPDATE_USERNAME_MUT,
+} from "@/common/mutation-types.js";
 import { getUser } from "@/api";
 
 const module = {
@@ -14,7 +17,7 @@ const module = {
     // },
     firstNameP: (state, getters, rootState) => (c) => {
       // return state.username.split(".")[0];
-      return state.username
+      return state.username;
     },
     reverseName: (state) => (c) => {
       return state.username.split("").reverse().join(c);
@@ -34,11 +37,11 @@ const module = {
       // console.log("new username", username);
       const user = await getUser(1);
       console.log(user);
-      console.log('status', ctx.rootState.status, ctx.state)
-      if (ctx.state.username){
-        ctx.commit(COMMIT_SET_STATUS_MUT, 'active', {root:true})
+      ctx.commit(COMMIT_UPDATE_USERNAME_MUT, user.username);
+      if (ctx.state.username) {
+        ctx.commit(COMMIT_SET_STATUS_MUT, "active", { root: true });
+        console.log("status", ctx.rootState.status, ctx.state);
       }
-      ctx.commit(COMMIT_UPDATE_USERNAME_MUT, username);
     },
     updateUserName2({ commit }, username) {
       commit(COMMIT_UPDATE_USERNAME_MUT, username);
